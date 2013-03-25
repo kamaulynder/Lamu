@@ -90,11 +90,13 @@ class Controller_Api_Forms extends Ushahidi_Api {
 								'key', 'label', 'input', 'type'
 								));
 							$_attribute->options = ( isset($attribute['options']) ) ? json_encode($attribute['options']) : NULL;
-							$_attribute->form_id = $form->id;
-							$_attribute->form_group_id = $_group->id;
 							$_attribute->save();
+							// Add relation
+							$_group->add('form_attributes', $_attribute);
+							$form->add('form_attributes', $_attribute);
 						}
 					}
+					
 				}
 			}
 
